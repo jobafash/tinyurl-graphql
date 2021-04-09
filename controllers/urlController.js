@@ -1,8 +1,8 @@
 'use strict';
 const URL = require('../models/urlModel');
 const Index = require('../models/indexModel');
-const checkUrl = require('../utils/helpers');
-const makeid = require('../utils/helpers');
+const checkUrl = require('../utils/helpers').checkUrl;
+const makeid = require('../utils/helpers').makeid;
 
 const minify = async (
   req,
