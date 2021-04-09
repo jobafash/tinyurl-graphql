@@ -1,32 +1,14 @@
 'use strict';
 const URL = require('../models/urlModel');
 const Index = require('../models/indexModel');
+const checkUrl = require('../utils/helpers');
+const makeid = require('../utils/helpers');
 
 const minify = async (
   req,
   { url, isObscured, expiresAt },
   io
 ) => {
-  const checkUrl = (url) => {
-    let regexp = /^(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
-    let valid = true;
-
-    // Test if url is correct
-    if (regexp.test(url) !== true) {
-      valid = false;
-    }
-
-    return valid;
-  };
-  const makeid = (length) => {
-    let result = [];
-    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let charactersLength = characters.length;
-    for (let i = 0; i < length; i++) {
-      result.push(characters.charAt(Math.floor(Math.random() * charactersLength)));
-   }
-   return result.join('');
-  }
   if (checkUrl(url) == true){
     let hash = makeid(6);
     let short_url = req.protocol + '://' + req.get('host') + '/';
